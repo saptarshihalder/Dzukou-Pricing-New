@@ -94,3 +94,12 @@ logs/
 pnpm-lock.yaml
 package-lock.json
 uv.lock
+
+# Electron
+/dist-electron/
+/build/
+
+# Python virtual environment
+.venv/
+venv/
+api/.venv/

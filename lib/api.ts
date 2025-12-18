@@ -2,6 +2,23 @@
 
 const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000';
 
+// Psychological analysis type for pricing recommendations
+export interface PsychologicalAnalysis {
+  price_change: number;
+  price_change_percent: number;
+  left_digit_changed: boolean;
+  original_ending: number;
+  psych_ending: number;
+  psychological_effects: string[];
+  behavioral_score: number;
+  category_factors: {
+    price_sensitivity: string;
+    brand_importance: string;
+  };
+  consumer_perception: string;
+  recommendation_strength: string;
+}
+
 export class ApiError extends Error {
   constructor(public status: number, message: string) {
     super(message);
@@ -136,13 +153,13 @@ export const optimizationApi = {
         risk_level: 'low' | 'medium' | 'high';
         confidence_score: number;
         scenarios: {
-          conservative: { price: number; expected_margin: number; psychological_analysis?: any };
-          recommended: { price: number; expected_margin: number; psychological_analysis?: any };
-          aggressive: { price: number; expected_margin: number; psychological_analysis?: any };
+          conservative: { price: number; expected_margin: number; psychological_analysis?: PsychologicalAnalysis };
+          recommended: { price: number; expected_margin: number; psychological_analysis?: PsychologicalAnalysis };
+          aggressive: { price: number; expected_margin: number; psychological_analysis?: PsychologicalAnalysis };
         };
         rationale: string;
         constraint_flags: string[];
-        psychological_analysis?: any;
+        psychological_analysis?: PsychologicalAnalysis;
         psychological_pricing_enabled?: boolean;
       }>;
       cache_info: {
@@ -168,13 +185,13 @@ export const optimizationApi = {
       risk_level: 'low' | 'medium' | 'high';
       confidence_score: number;
       scenarios: {
-        conservative: { price: number; expected_margin: number; psychological_analysis?: any };
-        recommended: { price: number; expected_margin: number; psychological_analysis?: any };
-        aggressive: { price: number; expected_margin: number; psychological_analysis?: any };
+        conservative: { price: number; expected_margin: number; psychological_analysis?: PsychologicalAnalysis };
+        recommended: { price: number; expected_margin: number; psychological_analysis?: PsychologicalAnalysis };
+        aggressive: { price: number; expected_margin: number; psychological_analysis?: PsychologicalAnalysis };
       };
       rationale: string;
       constraint_flags: string[];
-      psychological_analysis?: any;
+      psychological_analysis?: PsychologicalAnalysis;
       psychological_pricing_enabled?: boolean;
     }>('/routes/optimize-price', {
       method: 'POST',
@@ -204,13 +221,13 @@ export const optimizationApi = {
         risk_level: 'low' | 'medium' | 'high';
         confidence_score: number;
         scenarios: {
-          conservative: { price: number; expected_margin: number; psychological_analysis?: any };
-          recommended: { price: number; expected_margin: number; psychological_analysis?: any };
-          aggressive: { price: number; expected_margin: number; psychological_analysis?: any };
+          conservative: { price: number; expected_margin: number; psychological_analysis?: PsychologicalAnalysis };
+          recommended: { price: number; expected_margin: number; psychological_analysis?: PsychologicalAnalysis };
+          aggressive: { price: number; expected_margin: number; psychological_analysis?: PsychologicalAnalysis };
         };
         rationale: string;
         constraint_flags: string[];
-        psychological_analysis?: any;
+        psychological_analysis?: PsychologicalAnalysis;
         psychological_pricing_enabled?: boolean;
       }>;
     }>(url.pathname + url.search, {

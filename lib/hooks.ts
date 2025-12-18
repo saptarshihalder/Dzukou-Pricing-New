@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback } from 'react';
-import { scrapingApi, optimizationApi, healthApi, handleApiError } from './api';
+import { scrapingApi, optimizationApi, healthApi, handleApiError, PsychologicalAnalysis } from './api';
 
 // Hook for managing scraping runs
 export function useScrapingRun(runId?: string) {
@@ -161,13 +161,13 @@ export function usePriceOptimization() {
     risk_level: 'low' | 'medium' | 'high';
     confidence_score: number;
     scenarios: {
-      conservative: { price: number; expected_margin: number; psychological_analysis?: any };
-      recommended: { price: number; expected_margin: number; psychological_analysis?: any };
-      aggressive: { price: number; expected_margin: number; psychological_analysis?: any };
+      conservative: { price: number; expected_margin: number; psychological_analysis?: PsychologicalAnalysis };
+      recommended: { price: number; expected_margin: number; psychological_analysis?: PsychologicalAnalysis };
+      aggressive: { price: number; expected_margin: number; psychological_analysis?: PsychologicalAnalysis };
     };
     rationale: string;
     constraint_flags: string[];
-    psychological_analysis?: any;
+    psychological_analysis?: PsychologicalAnalysis;
     psychological_pricing_enabled?: boolean;
   }>>([]);
   const [loading, setLoading] = useState(false);
