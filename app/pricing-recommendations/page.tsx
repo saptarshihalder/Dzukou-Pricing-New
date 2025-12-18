@@ -167,7 +167,7 @@ export default function PricingRecommendationsPage() {
   const getPsychologicalBadge = (analysis: PsychologicalAnalysis | undefined) => {
     if (!analysis) return null;
     
-    const { consumer_perception, behavioral_score } = analysis;
+    const { consumer_perception } = analysis;
     
     switch (consumer_perception) {
       case "extremely_positive":
@@ -712,7 +712,7 @@ export default function PricingRecommendationsPage() {
                                           <div>
                                             <h5 className="font-medium text-sm mb-2">Applied Psychological Effects</h5>
                                             <div className="flex flex-wrap gap-2">
-                                              {selectedProduct.psychological_analysis.psychological_effects.map((effect, index) => (
+                                              {selectedProduct.psychological_analysis.psychological_effects.map((effect: string, index: number) => (
                                                 <Badge key={index} variant="secondary" className="text-xs">
                                                   {getPsychologicalEffectsText([effect])}
                                                 </Badge>
