@@ -18,6 +18,7 @@
     "electron:start": "electron .",
     "electron:build": "pnpm build && electron-builder",
     "electron:build:win": "pnpm build && electron-builder --win",
+    "electron:build:msi": "pnpm build && electron-builder --win msi",
     "electron:build:mac": "pnpm build && electron-builder --mac",
     "electron:build:linux": "pnpm build && electron-builder --linux"
   },
@@ -86,9 +87,17 @@
     "win": {
       "target": [
         "nsis",
+        "msi",
         "portable"
       ],
       "icon": "public/icon.ico"
+    },
+    "msi": {
+      "oneClick": false,
+      "perMachine": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "runAfterFinish": true
     },
     "mac": {
       "target": [
